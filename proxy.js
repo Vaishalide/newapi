@@ -7,16 +7,16 @@ const app = express();
 const BACKEND_URL = 'https://sorry-junie-ishaautofilterbot-a45d8912.koyeb.app';
  // Replace with your real backend URL
 
-app.use(cors({
-  origin: 'https://site.com'  // ✅ Replace with your real site URL
-}));
-app.use((req, res, next) => {
-  const allowedOrigin = 'https://site.com';
-  if (req.get('origin') !== allowedOrigin) {
-    return res.status(403).json({ error: 'Forbidden' });
-  }
-  next();
-});
+//app.use(cors({
+ // origin: 'https://site.com'  // ✅ Replace with your real site URL
+//}));
+//app.use((req, res, next) => {
+ // const allowedOrigin = 'https://site.com';
+//  if (req.get('origin') !== allowedOrigin) {
+ //   return res.status(403).json({ error: 'Forbidden' });
+//  }
+//  next();
+//});
 
 app.use(express.json());
 
