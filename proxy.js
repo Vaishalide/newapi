@@ -4,7 +4,8 @@ const axios = require('axios');
 const cors = require('cors');
 const app = express();
 
-const BACKEND_URL = 'https://sorry-junie-ishaautofilterbot-a45d8912.koyeb.app'; // Replace with your real backend URL
+const BACKEND_URL = 'https://sorry-junie-ishaautofilterbot-a45d8912.koyeb.app';
+ // Replace with your real backend URL
 
 app.use(cors()); // You can restrict this to your frontend domain
 app.use(express.json());
