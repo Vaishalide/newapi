@@ -7,7 +7,10 @@ const app = express();
 const BACKEND_URL = 'https://sorry-junie-ishaautofilterbot-a45d8912.koyeb.app';
  // Replace with your real backend URL
 
-app.use(cors()); // You can restrict this to your frontend domain
+app.use(cors({
+  origin: 'https://your-frontend-site.com'  // ✅ Replace with your real site URL
+}));
+
 app.use(express.json());
 
 app.get('/api/batches', async (req, res) => {
