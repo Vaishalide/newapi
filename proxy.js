@@ -48,6 +48,15 @@ app.get('/api/batches/:batchId/subjects/:subjectId/topics', async (req, res) => 
     res.status(500).json({ error: 'Failed to fetch topics' });
   }
 });
+app.get('/api/batches/:batchId/subjects/:subjectId/topics/:topicId', async (req, res) => {
+  const { batchId, subjectId, topicId } = req.params;
+  try {
+    const response = await axios.get(`${BACKEND_URL}/data/batches/${batchId}/subjects/${subjectId}/topics/${topicId}`);
+    res.json(response.data);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch topic details' });
+  }
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Proxy server running on port ${PORT}`));
