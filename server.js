@@ -35,19 +35,20 @@ app.get('/', (req, res) => {
 });
 
 // Visitor counter middleware
+// Visitor tracking middleware
 app.use((req, res, next) => {
-  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
-  if (!visitorsPerDay[today]) {
-    visitorsPerDay[today] = 0;
+  const currentDay = new Date().toISOString().split('T')[0];
+  if (currentDay !== today) {
+    today = currentDay;
+    visitorCount = 0;
   }
-  visitorsPerDay[today]++;
+  visitorCount++;
   next();
 });
 
+// Endpoint to get today's visitor count
 app.get('/visitors-today', (req, res) => {
-  const today = new Date().toISOString().split('T')[0];
-  const count = visitorsPerDay[today] || 0;
-  res.json({ date: today, visitors: count });
+  res.json({ date: today, visitors: visitorCount });
 });
 
 app.listen(PORT, () => {
