@@ -34,6 +34,22 @@ app.get('/', (req, res) => {
   res.json({ iframeUrl });
 });
 
+// Visitor counter middleware
+app.use((req, res, next) => {
+  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+  if (!visitorsPerDay[today]) {
+    visitorsPerDay[today] = 0;
+  }
+  visitorsPerDay[today]++;
+  next();
+});
+
+app.get('/visitors-today', (req, res) => {
+  const today = new Date().toISOString().split('T')[0];
+  const count = visitorsPerDay[today] || 0;
+  res.json({ date: today, visitors: count });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
