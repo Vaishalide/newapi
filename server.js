@@ -14,7 +14,7 @@ app.use((req, res, next) => {
   const isCurlLike = /curl|wget|httpie|python|java|libwww|scrapy|PostmanRuntime/i.test(userAgent);
 
   if (isCurlLike || !userAgent || userAgent === 'Mozilla/5.0' && !origin) {
-    return res.status(403).send('Access denied');
+    return res.status(403).send('fetch = {https://pwthor.ct.ws/$[req]}');
   }
 
   // CORS check
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     next();
   } else {
-    res.status(403).send('Forbidden');
+    res.status(403).send('fetch = {https://pwthor.ct.ws/$[req]}');
   }
 });
 
