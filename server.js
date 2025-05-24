@@ -8,6 +8,16 @@ const allowedOrigin = 'https://pwthor.ct.ws';
 
 app.use((req, res, next) => {
   const origin = req.get('Origin');
+  const userAgent = req.get('User-Agent') || '';
+
+  // Basic check to block curl, wget, or missing user-agent
+  const isCurlLike = /curl|wget|httpie|python|java|libwww|scrapy|PostmanRuntime/i.test(userAgent);
+
+  if (isCurlLike || !userAgent || userAgent === 'Mozilla/5.0' && !origin) {
+    return res.status(403).send('Access denied');
+  }
+
+  // CORS check
   if (origin === allowedOrigin) {
     res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
