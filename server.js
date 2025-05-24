@@ -34,22 +34,7 @@ app.get('/', (req, res) => {
   res.json({ iframeUrl });
 });
 
-// Visitor counter middleware
-// Visitor tracking middleware
-app.use((req, res, next) => {
-  const currentDay = new Date().toISOString().split('T')[0];
-  if (currentDay !== today) {
-    today = currentDay;
-    visitorCount = 0;
-  }
-  visitorCount++;
-  next();
-});
 
-// Endpoint to get today's visitor count
-app.get('/visitors-today', (req, res) => {
-  res.json({ date: today, visitors: visitorCount });
-});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
